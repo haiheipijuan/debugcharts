@@ -1,7 +1,7 @@
 // Simple live charts for memory consumption and GC pauses.
 //
 // To use debugcharts, link this package into your program:
-//	import _ "github.com/mkevac/debugcharts"
+//	import _ "github.com/haiheipijuan/debugcharts"
 //
 // If your application is not already running an http server, you
 // need to start one.  Add "net/http" and "log" to your imports and
@@ -29,7 +29,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/mkevac/debugcharts/bindata"
+	"github.com/haiheipijuan/debugcharts/bindata"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/process"
 )
@@ -122,7 +122,7 @@ func (s *server) gatherData() {
 				Mutex:        pprof.Lookup("mutex").Count(),
 				Threadcreate: pprof.Lookup("threadcreate").Count(),
 			}
-			
+
 			mutex.Lock()
 			data.Pprof = append(data.Pprof, PprofPair{
 				uint64(nowUnix) * 1000,
