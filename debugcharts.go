@@ -122,6 +122,8 @@ func (s *server) gatherData() {
 				Mutex:        pprof.Lookup("mutex").Count(),
 				Threadcreate: pprof.Lookup("threadcreate").Count(),
 			}
+			
+			mutex.Lock()
 			data.Pprof = append(data.Pprof, PprofPair{
 				uint64(nowUnix) * 1000,
 				u.Block,
@@ -144,8 +146,6 @@ func (s *server) gatherData() {
 
 			prevUserTime = cpuTimes.User
 			prevSysTime = cpuTimes.System
-
-			mutex.Lock()
 
 			bytesAllocated := ms.Alloc
 			u.BytesAllocated = bytesAllocated
